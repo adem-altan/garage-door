@@ -1,7 +1,12 @@
 var express = require("express");
 var app = express();
-
 var gpio = require('rpi-gpio').promise;
+var localtunnel = require('localtunnel');
+
+(async () => {
+  const tunnel = await localtunnel({ port: 3005 });
+  console.log(tunnel.url);
+})();
 
 function openClose() {
     gpio.setup(22, gpio.DIR_OUT)
@@ -28,7 +33,12 @@ function close() {
 
 app.get('/', (req, res) => res.status(200).json({ result: 'It Works on PI!' }));
 
+app.get('/open', (req, res) => {
+    res.status(200).json({ result: 'Button triggered!' });
+    console.log("Button triggered!");
+    return openClose();
+});
+
 app.listen(3005, () => {
     console.log("Server running on port 3005");
-    openClose();
 });
