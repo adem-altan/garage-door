@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Your garage door is: {{ garageDoorStatus }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,8 +15,10 @@
 
   <div id="container">
     <p>
-      <ion-button disabled="{{ isOpen }}" (click)="openClose()">Open</ion-button>
-      <ion-button disabled="{{ !isOpen }}" (click)="openClose()">Close</ion-button>
+      <ion-button disabled="{{ isOpen }}" color="success" size="large" (click)="openClose()">
+        <ion-icon slot= "start" name="lock-open-outline"></ion-icon>Open</ion-button>
+      <ion-button disabled="{{ !isOpen }}" color="danger" size="large" (click)="openClose()">
+        <ion-icon slot="end" name="lock-closed-outline"></ion-icon>Close</ion-button>
     </p>
   </div>
 </ion-content>

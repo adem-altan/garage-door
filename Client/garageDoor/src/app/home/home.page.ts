@@ -7,9 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
   private isOpen = false;
+  private garageDoorStatus = 'Unknown';
 
   private openClose = () => {
     this.isOpen = !this.isOpen;
+    this.garageDoorStatus = this.isOpen ? 'Open' : 'Close';
   }
 
   constructor() {}
