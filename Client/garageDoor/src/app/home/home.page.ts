@@ -11,7 +11,7 @@ export class HomePage {
   public isOpen = false;
   public garageDoorStatus = 'Unknown';
   public lastStatusUpdate: IonDatetime;
-  public url = 'http://dummy.restapiexample.com/api/v1/employees'; // 'https://ademsgaragedoor.loca.lt/open';
+  public url = 'https://ademsgaragedoor.loca.lt/open';
 
   public openClose = () => {
     this.isOpen = !this.isOpen;
