@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { IonDatetime } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,25 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  public isOpen = false;
+  public garageDoorStatus = 'Unknown';
+  public lastStatusUpdate: IonDatetime;
+  public url = 'http://dummy.restapiexample.com/api/v1/employees'; // 'https://ademsgaragedoor.loca.lt/open';
 
-  constructor() {}
+  public openClose = () => {
+    this.isOpen = !this.isOpen;
+    this.garageDoorStatus = this.isOpen ? 'Open' : 'Close';
+    this.http.get<Response>(this.url).toPromise().then(response => {
+      this.lastStatusUpdate = response.dateTime;
+      console.log(response);
+    });
+  }
 
+  constructor(private http: HttpClient) { }
+}
+
+interface Response {
+  status: string;
+  dateTime: IonDatetime;
+  action: string;
 }
