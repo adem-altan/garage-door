@@ -8,14 +8,16 @@ import { IonDatetime } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  private isOpen = false;
-  private garageDoorStatus = 'Unknown';
-  private url = 'http://dummy.restapiexample.com/api/v1/employees'; //'https://ademsgaragedoor.loca.lt/open';
+  public isOpen = false;
+  public garageDoorStatus = 'Unknown';
+  public lastStatusUpdate: IonDatetime;
+  public url = 'http://dummy.restapiexample.com/api/v1/employees'; // 'https://ademsgaragedoor.loca.lt/open';
 
-  private openClose = () => {
+  public openClose = () => {
     this.isOpen = !this.isOpen;
     this.garageDoorStatus = this.isOpen ? 'Open' : 'Close';
     this.http.get<Response>(this.url).toPromise().then(response => {
+      this.lastStatusUpdate = response.dateTime;
       console.log(response);
     });
   }
