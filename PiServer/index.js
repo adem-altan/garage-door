@@ -4,7 +4,7 @@ var gpio = require('rpi-gpio').promise;
 var localtunnel = require('localtunnel');
 
 (async () => {
-  const tunnel = await localtunnel(3005, { subdomain: 'mygaragedoor' });
+  const tunnel = await localtunnel(3005, { subdomain: 'ademsgaragedoor' });
   console.log(tunnel.url);
 })();
 
@@ -33,7 +33,7 @@ function close() {
 
 app.get('/', (req, res) => res.status(200).json({ result: 'It Works on PI!' }));
 
-app.post('/open', (req, res) => {
+app.get('/open', (req, res) => {
     openClose();
     console.log("Button triggered!");
     res.status(200).json({ result: 'Button triggered!' }).end(); 
